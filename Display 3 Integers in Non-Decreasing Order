@@ -1,0 +1,60 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	//Variables
+	int n1, n2, n3, min, mid, max;
+
+	//Asking for user input for three integers
+	cout << "Enter three integers: ";
+	cin >> n1 >> n2 >> n3;
+
+	if (n1 > n2 && n1 > n3) //If Statement that checks if n1 is the biggest integer
+	{
+		max = n1;
+		if (n2 > n3) //If Statement that checks if n2 is the second biggest integer and n3 the smallest
+		{
+			mid = n2;
+			min = n3;
+		}
+		else //Else statement that makes n3 the second biggest integer and n2 the smallest.
+		{
+			mid = n3;
+			min = n2;
+		}
+	}
+	else if (n2 > n1 && n2 > n3) //If Statement that checks if n2 is the biggest integer
+	{
+		max = n2;
+		if (n1 > n3) //If Statement that checks if n1 is the second biggest integer and n3 the smallest
+		{
+			mid = n1;
+			min = n3;
+		}
+		else //Else statement that makes n3 the second biggest integer and n1 the smallest.
+		{
+			mid = n3;
+			min = n1;
+		}
+	}
+	else //Else Statement that makes n3 the biggest number
+	{
+		max = n3;
+		if (n1 > n2) //If Statement that checks if n1 is the second biggest integer and n2 the smallest
+		{
+			mid = n1;
+			min = n2;
+		}
+		else //Else statement that makes n2 the second biggest integer and n1 the smallest.
+		{
+			mid = n2;
+			min = n1;
+		}
+	}
+
+	//Prints out the results in non-decreasing order.
+	cout << "n1, n2, and n3 are: " << min << ", " << mid << ", and " << max << endl;
+
+}
