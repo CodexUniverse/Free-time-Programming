@@ -1,0 +1,75 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	//Variables
+	int Day, Month, Year;
+	bool LeapYear;
+
+	//User Input
+	cout << "Enter a month in the year (1 for January, ... , 12 for December): ";
+	cin >> Month;
+	cout << "Enter a year: ";
+	cin >> Year;
+
+	//Calculations for a leap year with a boolean to check if it is a leap year or not. (The year can be divided by 4. if it can be divided evenly by 100 it is not a leap year, unless it can be evenly divided by 400.)
+	if (((Year % 4 == 0) && (!(Year % 100 == 0))) || ((Year % 4 == 0) && (!(Year % 100 == 0)) && (Year % 400 == 0))) 
+	{
+		LeapYear = true;
+	}
+	else
+	{
+		LeapYear = false;
+	}
+
+	//Switch Statement that provides a solution for each month of a year.
+	switch (Month)
+	{
+	case 1:
+		cout << "January " << Year << " has 31 days" << endl;
+		break;
+	case 2:
+		if (LeapYear == true) //Checks the previous boolean
+		{
+			cout << "Febuary " << Year << " has 29 days" << endl;
+			break;
+		}
+		else
+		{
+			cout << "Febuary " << Year << " has 28 days" << endl;
+			break;
+		}
+	case 3:
+		cout << "March " << Year << " has 31 days" << endl;
+		break;
+	case 4:
+		cout << "April " << Year << " has 30 days" << endl;
+		break;
+	case 5:
+		cout << "May " << Year << " has 31 days" << endl;
+		break;
+	case 6:
+		cout << "June " << Year << " has 30 days" << endl;
+		break;
+	case 7:
+		cout << "July " << Year << " has 31 days" << endl;
+		break;
+	case 8:
+		cout << "August " << Year << " has 31 days" << endl;
+		break;
+	case 9:
+		cout << "September " << Year << " has 30 days" << endl;
+		break;
+	case 10:
+		cout << "October " << Year << " has 31 days" << endl;
+		break;
+	case 11:
+		cout << "November " << Year << " has 30 days" << endl;
+		break;
+	case 12:
+		cout << "December " << Year << " has 31 days" << endl;
+		break;
+	}
+}
