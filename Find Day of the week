@@ -1,0 +1,72 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	//Variables
+	int todayDate, numDays, futureDate;
+	string todayName;
+
+	//User Input
+	cout << "Enter Today's Day (0 = Sunday, 1 = Monday, ... , 6 = Saturday): ";
+	cin >> todayDate;
+	cout << "Enter the number of days elapsed since then: ";
+	cin >> numDays;
+
+	futureDate = (todayDate + numDays) % 7; //calculations for the future date.
+
+	//This switch statement assigns the todayName variable based on the number received from input
+	switch (todayDate)
+	{
+	case 0: 
+		todayName = "Sunday";
+		break;
+	case 1: 
+		todayName = "Monday";
+		break;
+	case 2: 
+		todayName = "Tuesday";
+		break;
+	case 3: 
+		todayName = "Wednesday";
+		break;
+	case 4: 
+		todayName = "Thursday";
+		break;
+	case 5: 
+		todayName = "Friday";
+		break;
+	case 6: 
+		todayName = "Saturday";
+		break;
+	}
+	//Switch statement that applies to a case depending on what the calculation found.
+	switch (futureDate)
+	{
+	case 0: 
+		cout << "Today is " << todayName << " and the future day is Sunday" << endl;
+		break;
+	case 1: 
+		cout << "Today is " << todayName << " and the future day is Monday" << endl;
+		break;
+	case 2: 
+		cout << "Today is " << todayName << " and the future day is Tuesday" << endl;
+		break;
+	case 3: 
+		cout << "Today is " << todayName << " and the future day is Wednesday" << endl;
+		break;
+	case 4: 
+		cout << "Today is " << todayName << " and the future day is Thursday" << endl;
+		break;
+	case 5: 
+		cout << "Today is " << todayName << " and the future day is Friday" << endl;
+		break;
+	case 6: 
+		cout << "Today is " << todayName << " and the future day is Saturday" << endl;
+		break;
+	}
+
+}
