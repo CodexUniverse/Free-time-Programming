@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+	double a, b, c, root1, root2; //Variables for the appropriate calculator.
+
+	cout << "Insert a, b, and c to find the roots of ax2 + bx + c using the quadratic formula: ";
+	cin >> a >> b >> c;
+
+	if (pow(b, 2) - (4 * a*c) < 0 || a == 0) //Statement that checks if the square root is greater than 0 and the denominator will not equal 0.
+	{
+		cout << "This equation has no roots" << endl;
+	}
+	else if (pow(b, 2) - (4 * a*c) == 0) //Statement that checks if the square root will equal to 0.
+	{
+		root1 = -b / (2 * a);
+		cout << "This equation has one root, and it is: " << root1 << endl;
+	}
+	else //Proceeds with the quadratic formula
+	{
+		root1 = ((-b) + sqrt((pow(b, 2) - (4 * a * c)))) / (2 * a); // The + of the quadratic formula
+		root2 = ((-b) - sqrt((pow(b, 2) - (4 * a * c)))) / (2 * a); // The - of the quadratic formula
+		cout << "This equation has two roots, and they are: " << root1 << " and " << root2 << endl;
+	}
+}
