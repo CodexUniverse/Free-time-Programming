@@ -1,0 +1,79 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h> 
+
+using namespace std;
+
+int main()
+{
+	//Variables
+	int userInput, compInput;
+
+	//Computer Guess
+	srand(time(NULL)); //Initializes a random seed for the random variable.
+	compInput = rand() % 3; //Random Variable between 0 and 2.
+	
+	//Displays the Choices available to the user.
+	cout << "Rock (0), Paper (1), Scissors (2): ";
+	cin >> userInput;
+	
+	if (userInput == 0 || userInput == 1 || userInput == 2) //Checks to see if the player inputs a valid option, if not it tells the user and ends the code.
+	{
+		switch (userInput) //Switch statement that tests the userInput to the compInput
+		{
+		case 0: //Testing userInput's Rock against the compInput's random variable
+		{
+			if (compInput == 0)
+			{
+				cout << "Computer is Rock, You are Rock. It's a draw." << endl;
+			}
+			else if (compInput == 1)
+			{
+				cout << "Computer is Paper, You are Rock. Computer Wins!" << endl;
+			}
+			else
+			{
+				cout << "Computer is Scissors, You are Rock. You Win!" << endl;
+			}
+			break;
+		}
+		case 1: //Testing userInput's Paper against the compInput's random variable
+		{
+			if (compInput == 0)
+			{
+				cout << "Computer is Rock, You are Paper. You Win!" << endl;
+			}
+			else if (compInput == 1)
+			{
+				cout << "Computer is Paper, You are Paper. It's a draw." << endl;
+			}
+			else
+			{
+				cout << "Computer is Scissors, You are Paper. Computer Wins!" << endl;
+			}
+			break;
+		}
+		case 2: //Testing userInput's Scissor against the compInput's random variable
+		{
+			if (compInput == 0)
+			{
+				cout << "Computer is Rock, You are Scissors. Computer Wins!" << endl;
+			}
+			else if (compInput == 1)
+			{
+				cout << "Computer is Paper, You are Scissors. You Win!" << endl;
+			}
+			else
+			{
+				cout << "Computer is Scissors, You are Scissors. It's a draw." << endl;
+			}
+			break;
+		}
+
+		}
+	}
+	else //If the userInput does not equal 0, 1, or 2.
+	{
+		cout << "Input a valid choice." << endl;
+	}
+}
