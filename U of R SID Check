@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+int main() {
+	
+	string userInput; //User inserts the SID
+
+	cout << "Enter an SID: ";
+	cin >> userInput;
+
+	if (userInput.length() == 11) { //Checks to see if the string is 11 characters long. If not it is invalid
+		if (isdigit(userInput.at(0)) && isdigit(userInput.at(1)) && isdigit(userInput.at(2)) && isdigit(userInput.at(4)) && isdigit(userInput.at(5)) && isdigit(userInput.at(6)) && isdigit(userInput.at(8)) && isdigit(userInput.at(9)) && isdigit(userInput.at(10))) { //Checks if each character is a digit
+			if (userInput.at(3) == '-') { //Checks to see if the string is seperated by dash characters. If not it is invalid
+				if (userInput.at(7) == '-') { //Checks to see if the string is seperated by dash characters. If not it is invalid
+					cout << userInput << " is a valid U of R SID." << endl;
+				}
+				//Sub Section of else statements that tell the user that their input was invalid
+				else {
+					cout << userInput << " is an invalid U of R SID." << endl;
+				}
+			}
+			else {
+				cout << userInput << " is an invalid U of R SID." << endl;
+			}
+		}
+		else {
+			cout << userInput << " is an invalid U of R SID." << endl;
+		}
+	}
+
+	else {
+		cout << userInput << " is an invalid U of R SID." << endl;
+	}
+}
