@@ -1,0 +1,38 @@
+//GPS Locations for these cities are:
+//Saskatoon: 52.1332° N, 106.6700° W
+//Calgary: 51.0447° N, 114.0719° W
+//Edmonton: 53.5461° N, 113.4938° W
+//Vancouver: 49.2827° N, 123.1207° W
+//Victoria: 48.4284° N, 123.3656° W
+//Winnipeg: 49.8951° N, 97.1384° W
+//Toronto: 43.6532° N, 79.3832° W
+//Ottawa: 45.4215° N, 75.6972° W
+//Montreal: 45.5017° N, 73.5673° W
+
+#include <iostream>
+#include <math.h>
+#include <cmath> 
+
+int main() {
+
+	double x1, x2, y1, y2, d; //Calling Variables for the formula
+	const double earthRadius = 6371.01; //Constant Earth Radius Variable
+	const double pi = 3.14159265358979323846; //Constant Pi variable
+
+	//User Input for Latitude and longitude
+	std::cout << "Enter location 1 (latitude and longitude) in degrees: ";
+	std::cin >> x1 >> y1;
+	std::cout << "Enter location 2 (latitude and longitude) in degrees: ";
+	std::cin >> x2 >> y2;
+
+	//Converting the Latitude and Longitude into Radians.
+	x1 = x1 * pi / 180;
+	x2 = x2 * pi / 180;
+	y1 = y1 * pi / 180;
+	y2 = y2 * pi / 180;
+
+	//Formula for the great circle distance
+	d = earthRadius * (acos(((sin(x1)) * (sin(x2))) + ((cos(x1)) * (cos(x2)) * (cos(y1 - y2)))));
+	
+	std::cout << "The distance between the two locations is: " << d << " km" << std::endl;
+}
