@@ -1,0 +1,43 @@
+#include <iostream>
+#include <math.h>
+#include <cmath> 
+#include <string>
+
+using namespace std;
+
+int main() {
+
+	int decimalValue, result[4] = {}, n = 0;
+	char userInput;
+
+	cout << "Insert a Hex Digit: ";
+	cin >> userInput; 
+
+		switch (userInput) {
+			case '0': decimalValue = 0; break;
+			case '1': decimalValue = 1; break;
+			case '2': decimalValue = 2; break;
+			case '3': decimalValue = 3; break;
+			case '4': decimalValue = 4; break;
+			case '5': decimalValue = 5; break;
+			case '6': decimalValue = 6; break;
+			case '7': decimalValue = 7; break;
+			case '8': decimalValue = 8; break;
+			case '9': decimalValue = 9; break;
+			case 'A': decimalValue = 10; break;
+			case 'B': decimalValue = 11; break;
+			case 'C': decimalValue = 12; break;
+			case 'D': decimalValue = 13; break;
+			case 'E': decimalValue = 14; break;
+			case 'F': decimalValue = 15; break;
+		}
+
+	while(decimalValue > 0) {
+		result[n] = decimalValue % 2;
+		decimalValue /= 2;
+		n++;
+	}
+	
+	cout << result[3] << result[2] << result[1] << result[0];
+
+}
