@@ -1,0 +1,57 @@
+#include <iostream>
+#include <cmath> 
+#include <string>
+
+using namespace std;
+
+int main() {
+
+	//Variables
+	int n = 0, result[4] = {}, int sum = 0;
+	string userInput, binarySeperate[4] = {};
+	char ans;
+
+
+	//User Input
+	cout << "Insert Binary Digits in 0000 format to receive a Hex character: ";
+	cin >> userInput; 
+
+	//Grabs each of the Binary digits and puts them into an array.
+	binarySeperate[0] = userInput.at(0);
+	binarySeperate[1] = userInput.at(1);
+	binarySeperate[2] = userInput.at(2);
+	binarySeperate[3] = userInput.at(3);
+
+	//Converts the binary string into integers and places it into a different array.
+	result[3] = stoi(binarySeperate[0]);
+	result[2] = stoi(binarySeperate[1]);
+	result[1] = stoi(binarySeperate[2]);
+	result[0] = stoi(binarySeperate[3]);
+
+	//For loop that finds the decimal value of the binary digits
+	for (int i = 0; i < 4; i++) {
+		sum += (result[i] * pow(n, 2));
+		n++;
+	}
+
+	//Turns the answer into a char value and prints out the Hex Digit.
+	switch (sum) {
+	case 0: ans = '0'; break;
+	case 1: ans = '1'; break;
+	case 2: ans = '2'; break;
+	case 3: ans = '3'; break;
+	case 4: ans = '4'; break;
+	case 5: ans = '5'; break;
+	case 6: ans = '6'; break;
+	case 7: ans = '7'; break;
+	case 8: ans = '8'; break;
+	case 9: ans = '9'; break;
+	case 10: ans = 'A'; break;
+	case 11: ans = 'B'; break;
+	case 12: ans = 'C'; break;
+	case 13: ans = 'D'; break;
+	case 14: ans = 'E'; break;
+	case 15: ans = 'F'; break;
+	}
+	cout << "The Hex value is " << ans << endl;
+}
