@@ -7,12 +7,15 @@ using namespace std;
 
 int main() {
 
+	//Variables
 	int decimalValue, result[4] = {}, n = 0;
 	char userInput;
 
+	//User Input
 	cout << "Insert a Hex Digit: ";
 	cin >> userInput; 
 
+		// Sets the Hex digit to its decimal value
 		switch (userInput) {
 			case '0': decimalValue = 0; break;
 			case '1': decimalValue = 1; break;
@@ -31,13 +34,13 @@ int main() {
 			case 'E': decimalValue = 14; break;
 			case 'F': decimalValue = 15; break;
 		}
-
+		//Loops to apply numbers to the result array.
 	while(decimalValue > 0) {
 		result[n] = decimalValue % 2;
 		decimalValue /= 2;
 		n++;
 	}
 	
-	cout << result[3] << result[2] << result[1] << result[0];
+	cout << result[3] << result[2] << result[1] << result[0]; //Prints the binary result
 
 }
