@@ -7,7 +7,7 @@ using namespace std;
 int main() {
 
 	//Variables
-	int n = 0, result[4] = {}, int sum = 0;
+	int n = 0, result[4] = {}, sum = 0;
 	string userInput, binarySeperate[4] = {};
 	char ans;
 
