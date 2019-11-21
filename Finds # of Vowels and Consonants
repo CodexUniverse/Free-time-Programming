@@ -29,7 +29,6 @@ int main() {
 					continue; //continuing to the next character in the string if it's not a vowel or consonant.
 				}
 			}
-			cout << line << '\n';
 		}
 		txtInput.close(); //Closes the input file.
 	}
