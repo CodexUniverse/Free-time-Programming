@@ -22,7 +22,7 @@ int main() {
 				else if (line[i] == ' ') {
 					continue; //continuing to the next character in the string if it's not a vowel or consonant.
 				}
-				else if (line[i] >= 65 && line[i] <= 90) { // Making sure each character is actually a consonant rather than a special character.
+				else if (line[i] >= 65 && line[i] <= 90 || line[i] >= 97 && line[i] <= 122) { // Making sure each character is actually a consonant rather than a special character.
 					totalCons++;
 				}
 				else {
