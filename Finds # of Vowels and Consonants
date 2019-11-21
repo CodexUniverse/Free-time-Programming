@@ -1,0 +1,43 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+int main() {
+
+	int totalVowel = 0, totalCons = 0;
+	ifstream txtInput;
+	string line;
+	txtInput.open("ass4_Q6_input.txt"); //Opens the input file.
+
+	if (txtInput.is_open()) //Makes sure the text file actually opened, otherwise it will send you to the else statement.
+	{
+		while (getline(txtInput, line)) //While loop that grabs one line at a time to process.
+		{
+			for (int i = 0; i < line.length(); i++) { //For loop to check each character in a line.
+				if (tolower(line[i]) == 'a' || tolower(line[i]) == 'e' || tolower(line[i]) == 'i' || tolower(line[i]) == 'o' || tolower(line[i]) == 'u') { //Makes sure that the character is a vowel.
+					totalVowel++;
+				}
+				else if (line[i] == ' ') {
+					continue; //continuing to the next character in the string if it's not a vowel or consonant.
+				}
+				else if (line[i] >= 65 && line[i] <= 90) { // Making sure each character is actually a consonant rather than a special character.
+					totalCons++;
+				}
+				else {
+					continue; //continuing to the next character in the string if it's not a vowel or consonant.
+				}
+			}
+			cout << line << '\n';
+		}
+		txtInput.close(); //Closes the input file.
+	}
+	else { //Displays if your text file didn't open properly or doesn't actually exist.
+		cout << "File did not open properly or does not exist." << endl;
+	}
+
+	cout << "Total Vowels: " << totalVowel << "\n" "Total Consonants: " << totalCons << "\n"; //Total vowel count
+
+	return 0;
+}
