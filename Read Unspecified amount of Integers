@@ -1,0 +1,56 @@
+#include <iostream>
+
+using namespace std;
+int main() {
+	//Variables. The array contains the maximum, minimum, and userInput. index 0 is the max, index 1 is the min, index 2 is the Input.
+	int userInput[3] = {}, posCount = 0, negCount = 0, avgNum = 0, avgAmount = 0, Avg = 0;
+
+	cout << "Input an integer values (Type 0 to finish): ";
+	do {
+		cin >> userInput[2];
+		//Checks for the maximum value
+		if (userInput[2] > userInput[0]) {
+			userInput[0] = userInput[2];
+			if (userInput[2] > 0) { //Checks if it's positive
+				posCount++;
+			}
+			else if (userInput[2] < 0) { //Checks if it's negative
+				negCount++;
+			}
+			else {
+				break; //Breaks out of the loop if it's a 0.
+			}
+		}
+		//Checks for the minimum value
+		else if (userInput[2] < userInput[1]) {
+			userInput[1] = userInput[2];
+			if (userInput[2] > 0) { //Checks if it's positive
+				posCount++;
+			}
+			else if (userInput[2] < 0) { //Checks if it's negative
+				negCount++;
+			}
+			else {
+				break; //Breaks out of the loop if it's a 0.
+			}
+		}
+		else if (userInput[2] == 0) {
+			break; //Breaks out of the loop if it's a 0.
+		}
+
+		//Counts the average and the total
+		avgNum += userInput[2];
+		avgAmount++;
+		
+	} while (userInput[2] != 0);
+
+	Avg = avgNum / avgAmount; //Average
+
+	//Required Outputs
+	cout << "Number of Positive Values: " << posCount << "\n";
+	cout << "Number of Negative Values: " << negCount << "\n";
+	cout << "Maximum Value: " << userInput[0] << "\n";
+	cout << "Minimum Value: " << userInput[1] << "\n";
+	cout << "Total: " << avgNum << "\n";
+	cout << "Average: " << Avg << "\n";
+}
