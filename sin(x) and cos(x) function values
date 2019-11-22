@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+// "\n"
+int main() {
+	//Output for the non-repeatable portion of the source code to begin the table.
+	cout << setw(6) << fixed << right << "a";
+	cout << setw(12) << fixed << right << "sin(a)";
+	cout << setw(12) << fixed << right << "cos(a)" "\n";
+	cout << setw(6) << fixed << right << "======";
+	cout << setw(12) << fixed << right << "============";
+	cout << setw(12) << fixed << right << "============" "\n";
+
+	//For Loop that finds each sin and cos value and applies it correctly to a table.
+	for (double a = 0.0; a <= 90.0; a += 5.0) {
+		cout << setw(6) << fixed << setprecision(1) << right << a;
+		cout << setw(12) << fixed << setprecision(4) << right << sin(a);
+		cout << setw(12) << fixed << setprecision(4) << right << cos(a) << "\n";
+	}
+	cout << setw(30) << fixed << right << "------------------------------" << endl; // Bottom portion of the table
+}
