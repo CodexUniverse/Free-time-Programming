@@ -1,0 +1,112 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+//Function Initialization
+void userInput(int& year, int& day);
+int numberOfdays(int, int);
+string getMonthName(int);
+void printCalender(int, int);
+
+int main() {
+	int YEAR, DAY;
+	userInput(YEAR, DAY);
+	printCalender(YEAR, DAY);
+}
+
+//Used as a reference function to apply user input into the main function.
+void userInput(int& year, int& day) {
+	cout << "enter the year and the first day of the year: "; cin >> year >> day;
+}
+
+//Function that uses a switch statement to find the amount of days within a month. February's Leap year is also calculated.
+int numberOfdays(int monthNum ,int year) {
+	switch (monthNum) {
+		case 0: { //January
+			return 31;
+		}
+		case 1: { //February
+			if (((year % 4 == 0) && (!(year % 100 == 0))) || ((year % 4 == 0) && (!(year % 100 == 0)) && (year % 400 == 0))) //Leap year calculation
+			{
+				return 29;
+			}
+			else
+			{
+				return 28;
+			}
+		}
+		case 2: { //March
+			return 31;
+		}
+		case 3: { //April
+			return 30;
+		}
+		case 4: { //May
+			return 31;
+		}
+		case 5: { //June
+			return 30;
+		}
+		case 6: { //July
+			return 31;
+		}
+		case 7: { //August
+			return 31;
+		}
+		case 8: { //September
+			return 30;
+		}
+		case 9: { //October
+			return 31;
+		}
+		case 10: { //November
+			return 30;
+		}
+		case 11: { //December
+			return 31;
+		}
+	}
+}
+
+string getMonthName(int month) { //A Handy Function that calls onto an array for the name of a month using index values.
+	string months[12] = { "January", "February", "March", "April", "May", "June", 
+						"July", "August", "September", "October", "November", "December" };
+	return months[month]; //Returns the string of the index position: month.
+}
+
+void printCalender(int year, int day) {
+	//File I/O Control Variables
+	ofstream txtFile;
+	txtFile.open("Output.txt");
+	//Standard Variables
+	int stdWidth = 6;
+	int dayOfWeek = day;
+
+	//The main nested for loop section to print out a proper calendar.
+	for (int monthCount = 0; monthCount < 12; monthCount++) { //This prints out each individual month and whatever it contains.
+		txtFile << right << setw(25) << getMonthName(monthCount) << "\n"; //Proper title position for the month name.
+		txtFile << right << setw(stdWidth) << "Su" << setw(stdWidth) << "Mo" << setw(stdWidth) << "Tu" << setw(stdWidth) << "We" << setw(stdWidth) << "Th" << setw(stdWidth) << "Fr" << setw(stdWidth) << "Sa" "\n"; //Sets the dofweek format.
+		if (dayOfWeek > 0 && dayOfWeek < 6) { //Checks to see if there needs to be a space at the beginning of each month (i.e. the day of the week is greater than 0).
+			txtFile << right << setw(stdWidth * dayOfWeek) << "";
+		}
+		else {
+			dayOfWeek = 0;
+		}
+		for (int dayCount = 1; dayCount < numberOfdays(monthCount, year) + 1; dayCount++) { //Begins the counting of the days for the calender within a for loop. It finds the max days by calling on the "numberOfdays()" function.
+			//If the day of the week variable surpasses Saturday, it will reset to Sunday. Then it applies the day to the calendar.
+			if (dayOfWeek > 6) { 
+				txtFile << "\n";
+				dayOfWeek = 0;
+				txtFile << right << setw(stdWidth) << dayCount;
+				dayOfWeek++;
+			}
+			else { //It just applies the day to the calendar
+				txtFile << right << setw(stdWidth) << dayCount;
+				dayOfWeek++;
+			}
+		}
+		txtFile << "\n\n"; //Creates a space between the months
+	}
+}
