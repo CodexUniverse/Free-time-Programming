@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//Intializing the functions
+int indexOf(const string&, const string&);
+
+int main() {
+	string str1, str2;
+
+	//getline to receive the entire line of input from the user for the string.
+	cout << "Enter the first string: "; getline(cin, str1);
+	cout << "Enter the second string: "; getline(cin, str2);
+	//Displays the output for the index position by calling on the indexOf() function.
+	cout << "indexOf(\"" << str1 << "\", \"" << str2 << "\") is " << indexOf(str1, str2) << "\n";
+}
+
+//Function to find the index position of the first string in the second.
+int indexOf(const string& s1, const string& s2) {
+	int pos;
+	string newstring;
+
+	//For loop that appends the s2 string to the newstring without spaces.
+	for (int i = 0; i < s2.length(); i++) {
+		if (s2[i] == ' ') {
+			continue;
+		}
+		else {
+			newstring += s2[i]; //aplies the character to the newstring.
+		}
+	}
+
+	pos = newstring.find(s1); //finds the index position of the s1 in the s2.
+	return pos;
+}
