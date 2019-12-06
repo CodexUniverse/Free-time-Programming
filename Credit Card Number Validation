@@ -1,0 +1,103 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//Initializing the functions
+bool isValid(const string&);
+int sumOfDoubleEvenPlace(const string&);
+int getDigit(int);
+int sumOfOddPlace(const string&);
+bool startWith(const string&, const string&);
+
+int main() {
+	string cardNumb;
+
+	cout << "Enter a credit card number: "; cin >> cardNumb; //User Inputs Card Number
+
+	//If and else statements to say if the card number is valid or not
+	if (isValid(cardNumb) == true) {
+		cout << cardNumb << " is valid." "\n";
+	}
+	else {
+		cout << cardNumb << " is invalid." "\n";
+	}
+
+}
+
+//Function that checks if the card number begins with the appropriate numbers, and is divisible by 10 to be valid. 
+bool isValid(const string& number) {
+	int evenSum, oddSum, totalSum;
+	if (startWith(number, number.substr(0,1)) == true) { //If it starts with the right number, it will be true.
+		evenSum = sumOfDoubleEvenPlace(number); //this will find the sum of the function and put it into the evenSum variable
+		oddSum = sumOfOddPlace(number); //this will find the sum of the function and put it into the oddSum variable
+		totalSum = evenSum + oddSum; //this adds both sums together to receive a total
+		
+		if (totalSum % 10 == 0) { //Checks to see if the total is divisible by 10. If it can't be, it's invalid.
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}
+
+//Function finds the double of each even place.
+int sumOfDoubleEvenPlace(const string& number) {
+	int tempNum, EvenSum = 0;
+
+	//For loop to find every even digit from the highest index position.
+	for (int i = number.length() - 2; i > -1; i -= 2) {
+		tempNum = number[i] - 48; //Subtracts 48 to remove the decimal value and receive the int value.
+		EvenSum += getDigit(tempNum * 2); //multiplies the number by 2, and sends it to the getDigit Function.
+	}
+	return EvenSum;
+}
+
+//Function finds each digit, if it's greater than 10, it adds the two digits together (ex. 12: 1 + 2 = 3)
+int getDigit(int digi) {
+	int sum = 0;
+
+	//If the number is greater than 10, it needs to add the two digits together (ex. 12: 1 + 2 = 3)
+	if (digi >= 10) {
+		sum = digi / 10;
+		digi %= 10;
+		sum += digi;
+		return sum;
+	}
+	else {
+		return digi;
+	}
+}
+
+//Function finds the sum of all the odd place digits
+int sumOfOddPlace(const string& number) {
+	int tempNum, OddSum = 0;
+
+	//For loop to find every odd digit from the highest index position.
+	for (int i = number.length() - 1; i > -1; i -= 2) {
+		tempNum = number[i] - 48; //Subtracts 48 to remove the decimal value and receive the int value.
+		OddSum += tempNum; //Adds the odd number to the total.
+	}
+	return OddSum;
+}
+
+//Function checks if the cardNumb variable begins with certain character values.
+bool startWith(const string& number, const string& substr){
+	if (number.length() >= 13 || number.length() <= 16) { //Checks if the length is enough
+		if (number[0] == '4' || number[0] == '5' || number[0] == '6') { //Checks if the string begins with these numbers
+			return true;
+		}
+		else if (number[0] == '3' && number[1] == '7') { //Checks if the first and second index position of the string begin with these numbers
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}
