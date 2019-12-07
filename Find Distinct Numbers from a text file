@@ -1,0 +1,41 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+	//Main Variables
+	ifstream myfile;
+	int lineCount = 0;
+	string numInput[100] = {}, line;
+
+	//Opens the txt file
+	myfile.open("ass5_Q3_input.txt");
+
+	if (myfile.is_open()) { //Checks if the file is open
+		while (getline(myfile, line)) { //Grabs each line of the text file
+			numInput[lineCount] = line; //Sets the line value into the array
+			for (int i = lineCount - 1; i > -1; i--) { //Checks for duplicates. If there is a duplicate, it removes it
+				if (numInput[i] == line) {
+					numInput[lineCount] = "";
+				}
+			}
+			lineCount++; //Counter
+		}
+	}
+	else {
+		cout << "Text file did not open properly.";
+	}
+	myfile.close(); //Closes the txt file
+
+	//For loop to count all the array elements
+	for (int k = 0; k < 100; k++) {
+		if (numInput[k] != "") { //It won't print the array elements with nothing in it
+			cout << numInput[k] << "\n";
+		}
+		else {
+			continue;
+		}
+	}
+	return 0;
+}
