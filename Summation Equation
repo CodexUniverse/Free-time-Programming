@@ -1,0 +1,40 @@
+// Christian Otte
+// 200434003
+// 19/9/2020
+
+#include "A1.h"
+using namespace std;
+
+int main()
+{
+    float k, j, n, m, x = 0.0; //Variables for the equation
+
+    //Input of the user
+    cout << "Please enter k: " << endl;
+    cin >> k;
+    cout << "Please enter j: " << endl;
+    cin >> j;
+
+    //Initiating the first summation and equation within the parenthesis
+    for (n = 0; n <= k; n++) 
+    {
+        float sum = 0.0; // used to find the sum of the second summation.
+
+        //Initiating the second summation in the denominator
+        for (m = j + 1; m >= 1; m--) 
+        {
+            // If Statement to check whether sum equals 0; If it equals zero, it adds the output to the sum instead of multiplying.
+            if (sum != 0)
+            {
+                sum *= (m + j);
+            }
+            else {
+                sum += (m + j);
+            }
+        }
+        x += ((n + k) / sum); //performing the equation within the parenthesis
+    }
+    cout << "The answer is: " << x;
+    cin.ignore();
+    cin.get();
+}
