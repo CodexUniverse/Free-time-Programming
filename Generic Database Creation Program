@@ -1,0 +1,407 @@
+#include "A2.h"
+
+//Public Variables
+vector<Entity> ent; //initializing the vector using the Entity struct data type and calling it ent.
+Entity e;
+FIELD f;
+
+int main()
+{
+	//Initializing Variables
+	int option, optionID, IDcount = 0;
+
+	cout << "Generic database creation program.\n";
+
+	//Do-while loop so it runs first before checking if option equals 5 to stop the program.
+	do {
+	   cout << "What would you like to do next?\n"
+			<< "1. Add Entity\n"
+			<< "2. Edit Entity\n"
+			<< "3. Remove Entity\n"
+			<< "4. Print Entity Info\n"
+			<< "5. Stop The Program\n";
+		cin >> option;
+
+		//Switch-case statement used to go to the users choice from option input.
+		switch (option)
+		{
+			case 1: //Add Entity
+				addEntity(IDcount);
+				break;
+			case 2: // Edit Entity
+				editEntity(IDcount, optionID);
+				break;
+			case 3: //Remove Entity
+				deleteEntity(optionID, IDcount);
+				break;
+			case 4: //Print Entity Info
+				printEntity(optionID, IDcount);
+				break;
+			case 5: //Stop The Program
+				return 0;
+			//If option is not 1-5, it will ask the user again.
+			default:
+				cout << "Invalid Option.\n";
+				continue;
+		}
+	} while (option != 5);
+}
+
+/*
+Name: addEntity
+Purpose: to add a new Entity by an additional amount.
+Comments:
+*/
+void addEntity(int& cID)
+{
+	ent.push_back(e); //Adds another variable count for the vector
+	ent[cID].ID = cID; //Sets the ID of the entity vector to the newest ID num.
+	cout << "The new entity with ID " << cID << " has been added to the database.\n";
+	cID++;
+}
+
+/*
+Name: editEntity
+Purpose: to edit the fields within the specified Entity ID #.
+Comments:
+*/
+void editEntity(int& cID, int& ID)
+{
+	int option;
+	//Checking to see if there has been an Entity added or not. If not, it will add a new Entity.
+	if (cID == 0)
+	{
+		addEntity(cID);
+	}
+	//Do-while loop that asks you to enter a valid ID if you enter a higher number than the available IDcount.
+	do {
+		cout << "Please Enter ID of the entity to edit: ";
+		cin >> ID;
+		if (ID > cID - 1)
+		{
+			cout << "Please enter a valid ID.\n";
+			continue;
+		}
+	} while (ID > cID - 1);
+
+	do {
+		//Options to choose between for editing fields
+	   cout << "What would you like to do next?\n"
+			<< "1. Add Field\n"
+			<< "2. Edit Field\n"
+			<< "3. Remove Field\n"
+			<< "4. Go Back To Main Menu\n";
+		cin >> option;
+		if (option != 1 && option != 2 && option != 3 && option != 4)
+		{
+			cout << "Please input a valid option.";
+			continue;
+		}
+		//Switch-case to choose between user options for FIELDS.
+		switch (option)
+		{
+			case 1://Add Field
+				addField(ID);
+				break;
+			case 2://Edit Field
+				editField(ID);
+				break;
+			case 3://Remove Field
+				deleteField(ID);
+				break;
+			case 4://Go back to main menu
+				break;
+			default://Repeats the question if not valid option
+				cout << "Please enter a valid option.";
+				continue;
+		}
+	} while (option != 4);
+}
+
+/*
+Name: deleteEntity
+Purpose: to delete all information within the Entity # and the Entity itself.
+Comments:
+*/
+void deleteEntity(int& ID, int& cID)
+{
+	cout << "Please Enter Entity ID: ";
+	cin >> ID;
+	if (ID > cID - 1 || ID < 0) //Checking if Entity ID is greater than the total count or less than 0
+	{
+		cout << "Entity Does Not Exist.\n";
+	}
+	else
+	{
+		ent.erase(ent.begin() + ID); // Deletes the Entity
+		cout << "Deleted Entity ID " << ID << endl;
+		cID--;
+	}
+}
+
+/*
+Name: printEntity
+Purpose: to print out all the fields within an Entity ID #.
+Comments:
+*/
+void printEntity(int& ID, int& cID)
+{
+	if (cID != 0) //Checks if the count ID does not equal 0
+	{
+		cout << "Please Enter Entity ID: ";
+		cin >> ID;
+		if (ID > cID - 1 || ID < 0)
+		{
+			cout << "Entity ID " << ID << " does not exist.\n";
+		}
+		else
+		{
+			if (ent[ID].field.size() == 0) //Checks for the amount of fields
+			{
+				cout << "There are no fields to print.\n";
+			}
+			else
+			{
+				cout << "Entity ID " << ID << " has " << ent[ID].field.size() << " fields:\n";
+				for (int i = 0; i < ent[ID].field.size(); i++) //For loop to go through all the available fields
+				{
+					//Switch case to choose between the data types of each
+					switch (ent[ID].field[i].LastUsedType)
+					{
+					case 0:
+						cout << "[Field " << i << "] " << ent[ID].field[i].name << " : " << ent[ID].field[i].a << endl; break;
+					case 1:
+						cout << "[Field " << i << "] " << ent[ID].field[i].name << " : " << ent[ID].field[i].b << endl; break;
+					case 2:
+						cout << "[Field " << i << "] " << ent[ID].field[i].name << " : " << ent[ID].field[i].c << endl; break;
+					case 3:
+						if (ent[ID].field[i].d == 0)
+						{
+							cout << "[Field " << i << "] " << ent[ID].field[i].name << " : " << "false" << endl; break;
+						}
+						else
+						{
+							cout << "[Field " << i << "] " << ent[ID].field[i].name << " : " << "true" << endl; break;
+						}
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		cout << "Please Create An Entity First Before Printing.\n";
+	}
+}
+
+/*
+Name: addField
+Purpose: to add the fields within the specefied Entity ID #, both name and data type and input.
+Comments:
+*/
+void addField(int& ID)
+{
+	int Option, boolSafety;
+	double intSafety;
+	string charSafety;
+
+	ent[ID].field.push_back(f); //Adds another variable count to the field vector.
+	cout << "Adding field to entity (ID " << ent[ID].ID << ") named: "; //Adds a name to the field.name vector
+	cin.ignore();
+	getline(cin, ent[ID].field[ent[ID].fieldCount].name);
+	cout << "Select Type: 0 - characters, 1 - integer, 2 - float, 3 - boolean: ";
+	cin >> Option;
+	//Switch-case to choose between user options for the Option.
+	switch (Option)
+	{
+	case 0: //Character Option
+		cout << "Enter Field Value: ";
+		cin.ignore();
+		getline(cin, charSafety);
+		for (int i = 0; i < charSafety.length(); i++)
+		{
+			ent[ID].field[ent[ID].fieldCount].a[i] = charSafety[i];
+		}
+		ent[ID].field[ent[ID].fieldCount].LastUsedType = 0; break;
+	case 1: //Integer Option
+		cout << "Enter Field Value: ";
+		cin >> intSafety;
+		ent[ID].field[ent[ID].fieldCount].b = static_cast<int>(intSafety); //Stops errors from adding decimals to the int by casting it as an int
+		ent[ID].field[ent[ID].fieldCount].LastUsedType = 1; break;
+	case 2: //Float Option
+		cout << "Enter Field Value: ";
+		cin >> ent[ID].field[ent[ID].fieldCount].c;
+		ent[ID].field[ent[ID].fieldCount].LastUsedType = 2; break;
+	case 3: //Boolean Option
+		cout << "Enter Field Value: ";
+		cin >> boolSafety;
+		//Checks to make sure the boolean is equal to 1 or 0
+		if (boolSafety > 1 || boolSafety < 0)
+		{
+			ent[ID].field[ent[ID].fieldCount].d = 0;
+			cout << "**Setting boolean to 0 due to number being neither 1 or 0**\n";
+		}
+		else
+		{
+			ent[ID].field[ent[ID].fieldCount].d = boolSafety;
+		}
+		ent[ID].field[ent[ID].fieldCount].LastUsedType = 3; break;
+	default: break;
+	}
+	ent[ID].fieldCount++; //Adds to the total fieldCount
+}
+
+/*
+Name: editField
+Purpose: to edit the fields within a specific Entity ID #.
+Comments:
+*/
+void editField(int& ID) //Almost completely the same as the addField function, but it prints out the available fields to edit.
+{
+	string editName, charSafety;
+	int option, boolSafety;
+	double intSafety;
+	cout << "Edit Entity ID " << ID << ", with the following fields:\n";
+	for (int i = 0; i < ent[ID].field.size(); i++)
+	{
+		switch (ent[ID].field[i].LastUsedType)
+		{
+		case 0: cout << "\"" << ent[ID].field[i].name << "\"" << " : " << "\"" << ent[ID].field[i].a << "\"" << endl; break;
+
+		case 1: cout << "\"" << ent[ID].field[i].name << "\"" << " : " << "\"" << ent[ID].field[i].b << "\"" << endl; break;
+
+		case 2: cout << "\"" << ent[ID].field[i].name << "\"" << " : " << "\"" << ent[ID].field[i].c << "\"" << endl; break;
+
+		case 3: 
+			if (ent[ID].field[i].d == 0)
+			{
+				cout << "\"" << ent[ID].field[i].name << "\"" << " : " << "\"" << "false" << "\"" << endl; break;
+			}
+			else
+			{
+				cout << "\"" << ent[ID].field[i].name << "\"" << " : " << "\"" << "true" << "\"" << endl; break;
+			}
+		}
+	}
+	cout << "Input the field name you would like to change: ";
+	cin.ignore();
+	getline(cin, editName);
+	for (int i = 0; i < ent[ID].field.size(); i++)
+	{
+		if (ent[ID].field[i].name == editName)
+		{
+			cout << "Please input a new name for Field: "; //Adds a name to the field.name vector
+			cin.ignore();
+			getline(cin, ent[ID].field[i].name);
+			cout << "Select Type: 0 - characters, 1 - integer, 2 - float, 3 - boolean: ";
+			cin >> option;
+			//Switch-case to choose between user options for the typeOption.
+			switch (option)
+			{
+			case 0:
+				cout << "Enter Field Value: ";
+				cin.ignore();
+				getline(cin, charSafety);
+				for (int i = 0; i < charSafety.length(); i++)
+				{
+					ent[ID].field[i].a[i] = charSafety[i];
+				}
+				ent[ID].field[i].LastUsedType = 0; break;
+			case 1:
+				cout << "Enter Field Value: ";
+				cin >> intSafety;
+				ent[ID].field[i].b = static_cast<int>(intSafety);
+				ent[ID].field[i].LastUsedType = 1; break;
+			case 2:
+				cout << "Enter Field Value: ";
+				cin >> ent[ID].field[i].c;
+				ent[ID].field[i].LastUsedType = 2; break;
+			case 3:
+				cout << "Enter Field Value: ";
+				cin >> boolSafety;
+				if (boolSafety > 1 || boolSafety < 0)
+				{
+					ent[ID].field[i].d = 0;
+					cout << "**Setting boolean to 0 due to number being neither 1 or 0**\n";
+				}
+				else
+				{
+					ent[ID].field[i].d = boolSafety;
+				}
+				ent[ID].field[i].LastUsedType = 3; break;
+			default: break;
+			}
+		}
+	}
+}
+
+/*
+Name: deleteField
+Purpose: to delete all information within the Entity # and the Entity itself.
+Comments:
+*/
+void deleteField(int& ID)
+{
+	int fID;
+	cout << "Please Enter the Field #: ";
+	cin >> fID;
+	if (fID > ent[ID].fieldCount || fID < 0)
+	{
+		cout << "Field does not exist.\n";
+	}
+	else
+	{
+		//Deletes and lowers the totla fieldCount
+		ent[ID].field.erase(ent[ID].field.begin() + fID);
+		cout << "Deleted Field " << fID << endl;
+		ent[ID].fieldCount--;
+	}
+}
+
+///////////////////////
+// HEADER FILE BELOW //
+///////////////////////
+
+// Christian Otte
+// 200434003
+// 07/10/2020
+
+#pragma once
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stdlib.h>
+#include <math.h>
+using namespace std;
+
+//Initializing Functions
+void addEntity(int&);
+void editEntity(int&, int&);
+void deleteEntity(int&, int&);
+void printEntity(int&, int&);
+
+void addField(int&);
+void editField(int&);
+void deleteField(int&);
+
+//Field Structure that contains a name and variable data.
+struct FIELD 
+{
+	union
+	{
+		char a[128];
+		int b;
+		float c;
+		bool d;
+	};
+	string name;
+	int LastUsedType;
+};
+
+//Entity Structure that contains its ID number and the vector of FIELD.
+struct Entity
+{
+	unsigned int ID;
+	int fieldCount = 0;
+	vector<FIELD> field;
+};
