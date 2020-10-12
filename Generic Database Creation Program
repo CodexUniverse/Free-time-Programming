@@ -362,10 +362,6 @@ void deleteField(int& ID)
 // HEADER FILE BELOW //
 ///////////////////////
 
-// Christian Otte
-// 200434003
-// 07/10/2020
-
 #pragma once
 #include <iostream>
 #include <vector>
